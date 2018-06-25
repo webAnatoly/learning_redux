@@ -12,7 +12,7 @@ const counterControl = (props) => {
 };
 
 counterControl.propTypes = {
-  label: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
   clicked: PropTypes.func,
 };
 
