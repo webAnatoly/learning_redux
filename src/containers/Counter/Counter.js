@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
-class Counter extends Component {
-  render() {
+const Counter = (props) => {
     const {
       ctr,
       onIncrementCounter,
       onDecrementCounter,
       onAddCounter,
       onSubtractCounter,
-    } = this.props;
+  } = props;
     return (
       <div>
         <CounterOutput value={ctr} />
@@ -23,8 +22,7 @@ class Counter extends Component {
         <CounterControl label="Subtract 5" clicked={onSubtractCounter} />
       </div>
     );
-  }
-}
+};
 
 Counter.propTypes = {
   ctr: PropTypes.number.isRequired,
