@@ -26,7 +26,7 @@ const Counter = (props) => {
       <CounterControl label="Add 5" clicked={onAddCounter} />
       <CounterControl label="Subtract 5" clicked={onSubtractCounter} />
       <hr />
-      <button type="button" onClick={onStoreResult}>
+      <button type="button" onClick={() => onStoreResult(ctr)}>
         Store Result
       </button>
       <ul>
@@ -44,8 +44,8 @@ const Counter = (props) => {
 };
 
 const mapStateToProps = state => ({
-  ctr: state.counter,
-  storedResults: state.results,
+  ctr: state.ctr.counter,
+  storedResults: state.res.results,
 });
 /* mapStateToProps called every time the store state changes.
 It receives the entire store state, and should return an object full of data.
@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
   onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
   onAddCounter: () => dispatch({ type: actionTypes.ADD, value: 5 }),
   onSubtractCounter: () => dispatch({ type: actionTypes.SUBTRACT, value: 5 }),
-  onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULT }),
+  onStoreResult: result => dispatch({ type: actionTypes.STORE_RESULT, value: result }),
   onDeleteResult: id => dispatch({ type: actionTypes.DELETE_RESULT, deleteId: id }),
 });
 /* mapDispatchToProps called once on component creation. It receives the dispatch method,
