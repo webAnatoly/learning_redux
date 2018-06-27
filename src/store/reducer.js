@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 const initialState = {
   counter: 0,
+  results: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,8 +20,14 @@ const reducer = (state = initialState, action) => {
     case 'SUBTRACT':
       newState.counter -= action.value;
       return newState;
+    case 'STORE_RESULT':
+      newState.results = newState.results.concat({ id: `${new Date()} ${Math.random()}`, value: newState.counter });
+      return newState;
+    case 'DELETE_RESULT':
+      newState.results = newState.results.filter(obj => obj.id !== action.deleteId);
+      return newState;
     default:
-      return state; // по умолчанию возвращает полученный state неизменным.
+      return newState; // по умолчанию просто возвращаю просто неизменную копию state.
   }
 };
 
