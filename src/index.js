@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import {
+  createStore, combineReducers, applyMiddleware, compose,
+} from 'redux';
 import { Provider } from 'react-redux';
 import './normalize.css';
 import './index.css';
@@ -40,7 +42,12 @@ const logger = store => next => (action) => {
 // соединяем наш middleware с нашим store
 // в функцию applyMiddleware можно добавлять столько middleware, скольно нужно через запятую
 // applyMiddleware(looger, logger2, logger3)
-const store = createStore(rootReducer, applyMiddleware(logger));
+
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+/* eslint-enable */
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)));
 
 ReactDOM.render(
   <Provider store={store}>
