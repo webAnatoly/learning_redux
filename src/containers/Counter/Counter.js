@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions/actions';
 import s from './Counter.css';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
@@ -52,12 +52,12 @@ It receives the entire store state, and should return an object full of data.
 Each field in the returned object becomes a prop for the wrapped component. */
 
 const mapDispatchToProps = dispatch => ({
-  onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }),
-  onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
-  onAddCounter: () => dispatch({ type: actionTypes.ADD, value: 5 }),
-  onSubtractCounter: () => dispatch({ type: actionTypes.SUBTRACT, value: 5 }),
-  onStoreResult: result => dispatch({ type: actionTypes.STORE_RESULT, value: result }),
-  onDeleteResult: id => dispatch({ type: actionTypes.DELETE_RESULT, deleteId: id }),
+  onIncrementCounter: () => dispatch(actionCreators.increment()),
+  onDecrementCounter: () => dispatch(actionCreators.decrement()),
+  onAddCounter: () => dispatch(actionCreators.add({ value: 5 })),
+  onSubtractCounter: () => dispatch(actionCreators.subtract({ value: 5 })),
+  onStoreResult: result => dispatch(actionCreators.storeResult({ value: result })),
+  onDeleteResult: id => dispatch(actionCreators.deleteResult({ deleteId: id })),
 });
 /* mapDispatchToProps called once on component creation. It receives the dispatch method,
 and should return an object full of functions that use dispatch. */

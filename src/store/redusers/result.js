@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as actionTypes from '../actions';
+import * as actionTypes from '../actions/actions';
 
 const initialState = {
   results: [],
@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
       newState.results = newState.results.filter(obj => obj.id !== action.deleteId);
       return newState;
     default:
-      return newState; // по умолчанию просто возвращаю просто неизменную копию state.
+      return state;
   }
 };
 
