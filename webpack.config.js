@@ -1,56 +1,51 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-module.exports = (env) => {
-  const config = {
-    entry: ['babel-polyfill', './src/index.js'],
-    output: {
-      filename: 'browser-bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /(node_modules)/,
-          use: {
-            loader: 'babel-loader',
+module.exports = env => ({
+  entry: ['babel-polyfill', './src/index.js'],
+  output: {
+    filename: 'browser-bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  devtool: env === 'development' ? 'inline-cheap-source-map' : false,
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
           },
-        },
-        {
-          test: /\.css$/,
-          use: [
-            {
-              loader: 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]_[local]_[hash:base64:5]',
+              sourceMap: false,
+              minimize: true,
             },
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[name]_[local]_[hash:base64:5]',
-                sourceMap: false,
-                minimize: true,
-              },
-            },
-          ],
-        },
-        {
-          test: /\.(jpe?g|png|gif|svg)$/i,
-          loader: 'file-loader',
-          options: {},
-        },
-      ],
-    },
-    plugins: [
-      new HtmlWebPackPlugin({
-        template: './src/index.html',
-        filename: './index.html',
-      }),
+          },
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader',
+        options: {},
+      },
     ],
-  };
-
-  if (env === 'development' || env.development === 'development') { config.devtool = 'inline-cheap-source-map'; }
-
-  return config;
-};
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+    }),
+  ],
+});
