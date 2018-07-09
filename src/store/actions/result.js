@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 
 export const saveResult = (payload) => {
   // Здесь можно добавлять какую-нибудь логику.
-  // Просто ради примера увеличи value в два раза.
+  // Просто ради примера увеличил value в два раза.
   // Например полученные данные с сервера, можно тут как-то обработать и потом добавить уже в state
   const { value } = { ...payload };
   const updatedResult = value * 2;
