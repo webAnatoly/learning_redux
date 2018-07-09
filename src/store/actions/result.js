@@ -1,11 +1,15 @@
 import * as actionTypes from './actionTypes';
 
-export const saveResult = payload => (
-  {
+export const saveResult = (payload) => {
+  // Здесь можно добавлять какую-нибудь логику.
+  // Просто ради примера увеличи value в два раза.
+  const { value } = { ...payload };
+  const updatedResult = value * 2;
+  return {
     type: actionTypes.STORE_RESULT,
-    ...payload,
-  }
-);
+    value: updatedResult,
+  };
+};
 
 /*
 The only place where we can execute asynchronous code is in our action creator.
