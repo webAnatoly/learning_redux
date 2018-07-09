@@ -7,7 +7,7 @@ module.exports = env => ({
     filename: 'browser-bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devtool: env === 'development' ? 'inline-cheap-source-map' : false,
+  devtool: env === 'development' ? 'cheap-source-map' : false,
   module: {
     rules: [
       {

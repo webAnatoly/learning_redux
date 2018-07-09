@@ -40,12 +40,9 @@ You may also create your own middleware. https://redux.js.org/api-reference/stor
 */
 const logger = store => next => (action) => {
   console.log('[Middleware] Dispatching', 'action: ', action);
-  /* Здесь мы имеем доступ к action. Можем его модифицировать. И возвращать новый action */
+  /* Здесь мы имеем доступ к action. Можем его модифицировать. */
   const result = next(action);
   console.log('[Middleware] next state', 'state: ', store.getState());
-  // Возвращаем новый action.
-  // Пока что я тут ничего не модифицировал,
-  // а просто вернул action без изменений и просто вывел в консоль store.getState().
   return result;
 };
 
@@ -56,6 +53,7 @@ const logger = store => next => (action) => {
 // thunk это готовый пакет middleware https://github.com/reduxjs/redux-thunk
 
 /* eslint-disable no-underscore-dangle */
+// это подключение redux-dev-tool для удобного дебага redux
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
