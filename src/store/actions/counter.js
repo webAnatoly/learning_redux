@@ -1,10 +1,4 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const ADD = 'ADD';
-export const SUBTRACT = 'SUBTRACT';
-export const STORE_RESULT = 'STORE_RESULT';
-export const DELETE_RESULT = 'DELETE_RESULT';
-
+import * as actionTypes from './actionTypes';
 /*
 Action Creators
 It is common to use action creator functions to encapsulate the process of creating action objects.
@@ -13,24 +7,16 @@ leads to cleaner code and better reusability.
 Action creators are not required, but are a good practice.
 In addition, action creators are useful for handling asynchronous code. */
 export const increment = () => ({
-  type: INCREMENT,
+  type: actionTypes.INCREMENT,
 });
 export const decrement = () => ({
-  type: DECREMENT,
+  type: actionTypes.DECREMENT,
 });
 export const add = payload => ({
-  type: ADD,
+  type: actionTypes.ADD,
   ...payload,
 });
 export const subtract = payload => ({
-  type: SUBTRACT,
-  ...payload,
-});
-export const storeResult = payload => ({
-  type: STORE_RESULT,
-  ...payload,
-});
-export const deleteResult = payload => ({
-  type: DELETE_RESULT,
+  type: actionTypes.SUBTRACT,
   ...payload,
 });
