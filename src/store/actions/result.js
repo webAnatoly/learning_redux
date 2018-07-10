@@ -16,11 +16,8 @@ export const saveResult = (payload) => {
 The only place where we can execute asynchronous code is in our action creator.
 It's what redux-funk is made for and it's the common and best practice pattern.
 */
-// благодаря redux-thunk возвращаемая функция может принимать дополнительный аргумент getState
-export const storeResult = payload => (dispatch, getState) => (
+export const storeResult = payload => dispatch => (
   setTimeout(() => {
-    const oldCounter = getState().ctr.counter; // можно получать доступ объекту state до вызова функции dispatch
-    console.log('oldCounter', oldCounter);
     dispatch(saveResult(payload));
   }, 2000)
 );
