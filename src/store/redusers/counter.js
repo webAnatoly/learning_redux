@@ -1,27 +1,22 @@
-import _ from 'lodash';
 import * as actionTypes from '../actions/actionTypes';
+import updateObject from '../utility';
 
 const initialState = {
   counter: 0,
 };
 
 const reducer = (state = initialState, action) => {
-  const newState = _.cloneDeep(state);
   switch (action.type) {
     case actionTypes.INCREMENT:
-      newState.counter += 1;
-      return newState;
+      return updateObject(state, { counter: state.counter + 1 });
     case actionTypes.DECREMENT:
-      newState.counter -= 1;
-      return newState;
+      return updateObject(state, { counter: state.counter - 1 });
     case actionTypes.ADD:
-      newState.counter += action.value;
-      return newState;
+      return updateObject(state, { counter: state.counter + action.value });
     case actionTypes.SUBTRACT:
-      newState.counter -= action.value;
-      return newState;
+      return updateObject(state, { counter: state.counter - action.value });
     default:
-      return newState;
+      return state; // по умолчанию возвращаем оригинальный, неизменный state
   }
 };
 
